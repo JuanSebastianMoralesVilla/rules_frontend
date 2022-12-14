@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;    
     align-content: center;    
+    background-color: lightgray;
 }
 
 .title{
@@ -16,4 +17,12 @@
     justify-content: center;
     align-content: center;
     position: relative;
+}
+
+.TextField{
+    background-color: white;
+}
+
+.rule-container{
+    padding-top: 20px;
 }
