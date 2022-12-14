@@ -8,22 +8,22 @@ import {Select,MenuItem} from '@material-ui/core';
 
 
 
-function Selector({type, columnsNumber}){
+function Selector({type, columnsNumber, updateRule}){
 
     const options = [];
-    const [course,setCourse]=React.useState(3);
-   const updateSelectVal=(e)=>{console.warn(e.target.value)
-setCourse(e.target.value)
-}
-      
 
+    const [selectedColumn,setColumn] = React.useState("");
+    const updateSelectVal = (e) => {
+        setColumn(e.target.value)
+    }  
+    
     switch(type){
         case('logical'):
-            options.push(<Grid xs={1}><Button variant="contained"  className="button button-logical">AND</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('AND')} className="button button-logical">AND</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained"  className="button button-logical">OR</Button></Grid>);
             break;
         case('comparation'):
-            options.push(<Grid xs={1}><Button variant="contained" onClick={()=>console.log("test")}className="button button-comparation">=</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">=</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'>'}</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'<'}</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{">"}=</Button></Grid>);
@@ -34,13 +34,13 @@ setCourse(e.target.value)
             
         case('columns'):
         
-        options.push(<Grid xs={2}><Select value={course}
-        displayEmpty
-        onChange={updateSelectVal}>
-            <MenuItem value="" disable>Selecione columna </MenuItem>
-            <MenuItem value={1} disable>COLUMNA1</MenuItem>
-            <MenuItem value={2} disable>COLUMNA2</MenuItem>
-            </Select></Grid>);
+            options.push(<Grid xs={2}>
+                            <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>
+                                <MenuItem value="" disable>Selecione columna </MenuItem>
+                                <MenuItem value={1} disable>COLUMNA1</MenuItem>
+                                <MenuItem value={2} disable>COLUMNA2</MenuItem>
+                            </Select>
+                        </Grid>);
       
             break;
         default:

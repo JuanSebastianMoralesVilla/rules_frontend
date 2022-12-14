@@ -10,9 +10,18 @@ import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 //import { DataGrid } from '@mui/x-data-grid';
 
-class Home extends Component{
-  
+class Home extends Component{  
+
+  constructor(){
+    super();
+    this.rule = 'asdasdasd';
+  }  
+
   render(){
+    
+    const updateRule = (value) =>{
+      this.rule = this.rule + value;
+    }
 
     return (
       <div className='home'>
@@ -21,14 +30,14 @@ class Home extends Component{
           <h1>MOTOR DE REGLAS </h1>
         </div>
         <div className='expression-builder-selectors'>
-          <Selector type='logical' columnsNumber={1}></Selector>
+          <Selector type='logical' columnsNumber={1} updateRule={updateRule} ></Selector>
           <Selector type='comparation' columnsNumber={3}></Selector>
           <Selector type='columns' columnsNumber={1}></Selector>
         </div>        
         <div className='rule-container'>
           <Stack direction='row' spacing={2}>
             <Box sx={{width: 500, maxWidth: '100%',}}>
-              <TextField fullWidth label="Regla" id="rule" />
+              <TextField fullWidth label="Regla" id="rule">{this.rule}</TextField>
             </Box>
             <Button variant="contained" endIcon={<SendIcon />}>Validar</Button>
           </Stack>          
