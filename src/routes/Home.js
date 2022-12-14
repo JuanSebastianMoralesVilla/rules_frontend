@@ -23,7 +23,7 @@ class Home extends Component{
         <div className='expression-builder-selectors'>
           <Selector type='logical' columnsNumber={1}></Selector>
           <Selector type='comparation' columnsNumber={3}></Selector>
-          <Selector type='columns' columnsNumber={3}></Selector>
+          <Selector type='columns' columnsNumber={1}></Selector>
         </div>        
         <div className='rule-container'>
           <Stack direction='row' spacing={2}>
@@ -32,6 +32,9 @@ class Home extends Component{
             </Box>
             <Button variant="contained" endIcon={<SendIcon />}>Validar</Button>
           </Stack>          
+        </div>
+        <div>
+
         </div>
         <div>
           <Button variant="contained" endIcon={<SendIcon />}>probar regla</Button>

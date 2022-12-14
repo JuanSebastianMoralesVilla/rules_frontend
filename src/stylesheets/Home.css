@@ -6,17 +6,23 @@
 }
 
 .title{
-    text-align: center;
-    position: relative;
+    /*text-align: top;
+    --position: relative;*/
+    display: inline-block;
+    vertical-align: top;
+
 }
 
 .expression-builder-selectors{
+   
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     align-content: center;
     position: relative;
+    font-size: 35px;
+
 }
 
 .TextField{
