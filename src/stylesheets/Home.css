@@ -1,0 +1,19 @@
+.home{
+    display: flex;
+    flex-wrap: wrap;    
+    align-content: center;    
+}
+
+.title{
+    text-align: center;
+    position: relative;
+}
+
+.expression-builder-selectors{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+}
