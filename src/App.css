@@ -15,13 +15,13 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem;
-  background-color: #F0F3F4;
-  color: black;
+  background-color: white;
+  color:black;
 }
 
 /* Navbar CSS */
 .navbar {
-  background-color: lightgrey;
+  background-color:  rgba(213, 1, 0, 1);
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -32,11 +32,11 @@
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
-  color: #000;
+  color:  white;
 }
 
 .nav-menu {
-  background-color: #ffffff;
+  background-color:black;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -63,7 +63,7 @@
 
 .nav-text a {
   text-decoration: none;
-  color: #151414;
+  color: rgba(213, 1, 0, 1);
   font-size: 18px;
   width: 95%;
   height: 100%;
@@ -71,11 +71,12 @@
   align-items: center;
   padding: 0 16px;
   border-radius: 4px;
+  
 }
 
 .nav-text a:hover {
   background-color: #000000;
-  color: #fff;
+  color:  white;
 }
 
 .nav-menu-items {
@@ -83,7 +84,7 @@
 }
 
 .navbar-toggle {
-  background-color: #ffffff;
+  background-color:black;
   width: 100%;
   height: 80px;
   display: flex;

@@ -24,11 +24,16 @@ const AppLayout = () => (
   </>
 );
 const router = createBrowserRouter(createRoutesFromElements(
+
+
+ 
   <Route element={<AppLayout />}>
     <Route path="/" element={<Home />} />
     <Route path="/data" element={<Data />} />
     <Route path="/credits" element={<Credits />} />
   </Route>
+
+  
 ));
 
 createRoot(document.getElementById("root")).render(

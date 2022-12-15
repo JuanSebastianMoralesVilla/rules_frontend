@@ -45,9 +45,9 @@ function Selector({type, columnsNumber, updateRule}){
         
             options.push(<Grid xs={2}>
                             <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>
-                                <MenuItem value="" disable>Selecione columna </MenuItem>
-                                <MenuItem value={1} onClick={() => updateRule('COLUMNA1')} disable>COLUMNA1</MenuItem>
-                                <MenuItem value={2} onClick={() => updateRule('COLUMNA2')} disable>COLUMNA2</MenuItem>
+                                <MenuItem value="" disable>Select column</MenuItem>
+                                <MenuItem value={1} onClick={() => updateRule('COLUMNA1')} disable>COLUMN 1</MenuItem>
+                                <MenuItem value={2} onClick={() => updateRule('COLUMNA2')} disable>COLUMN 2</MenuItem>
                             </Select>
                         </Grid>);
       
