@@ -18,11 +18,15 @@ function Selector({type, columnsNumber, updateRule}){
     }  
     
     switch(type){
+     
         case('logical'):
+       
             options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('AND')} className="button button-logical">AND</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained"  className="button button-logical">OR</Button></Grid>);
             break;
+        
         case('comparation'):
+       
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">=</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'>'}</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'<'}</Button></Grid>);
@@ -30,7 +34,7 @@ function Selector({type, columnsNumber, updateRule}){
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{"<"}=</Button></Grid>);
             options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{"!="}</Button></Grid>);
             break;    
-            
+        
             
         case('columns'):
         
@@ -44,6 +48,8 @@ function Selector({type, columnsNumber, updateRule}){
       
             break;
         default:
+           
+          
     }
     return(
         <div className={`selector ${type}`}>            
