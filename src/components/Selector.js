@@ -22,27 +22,32 @@ function Selector({type, columnsNumber, updateRule}){
         case('logical'):
        
             options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('AND')} className="button button-logical">AND</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained"  className="button button-logical">OR</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('OR')} className="button button-logical">OR</Button></Grid>);
             break;
         
         case('comparation'):
        
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">=</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'>'}</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{'<'}</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{">"}=</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{"<"}=</Button></Grid>);
-            options.push(<Grid xs={1}><Button variant="contained" className="button button-comparation">{"!="}</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('=')} className="button button-comparation">=</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('>')} className="button button-comparation">{'>'}</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('<')} className="button button-comparation">{'<'}</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('>=')} className="button button-comparation">{">"}=</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('<=')} className="button button-comparation">{"<"}=</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('!=')} className="button button-comparation">{"!="}</Button></Grid>);
             break;    
         
+        case('boolean'):
+       
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('true')} className="button button-comparation">true</Button></Grid>);
+            options.push(<Grid xs={1}><Button variant="contained" onClick={() => updateRule('false')} className="button button-comparation">false</Button></Grid>);
+            break;  
             
         case('columns'):
         
             options.push(<Grid xs={2}>
                             <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>
                                 <MenuItem value="" disable>Selecione columna </MenuItem>
-                                <MenuItem value={1} disable>COLUMNA1</MenuItem>
-                                <MenuItem value={2} disable>COLUMNA2</MenuItem>
+                                <MenuItem value={1} onClick={() => updateRule('COLUMNA1')} disable>COLUMNA1</MenuItem>
+                                <MenuItem value={2} onClick={() => updateRule('COLUMNA2')} disable>COLUMNA2</MenuItem>
                             </Select>
                         </Grid>);
       

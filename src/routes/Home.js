@@ -23,8 +23,18 @@ class Home extends Component{
 
   render(){
     
-    const updateRule = (value) =>{
-      this.rule = this.rule + value;
+    const updateRule = (symbol) =>{
+      var input = document.getElementById('rule');
+      
+      var cursorPos = input.selectionStart;
+
+      var value = input.value;
+      
+      input.value= [value.slice(0, cursorPos), symbol + ' ', value.slice(cursorPos)].join('');
+
+      input.setSelectionRange(input.value.length, input.value.length);
+      input.focus();
+       
     }
 
     return (
@@ -36,8 +46,9 @@ class Home extends Component{
         <container>
         <div className='expression-builder-selectors'>
           <Selector type='logical' columnsNumber={1} updateRule={updateRule} ></Selector>
-          <Selector type='comparation' columnsNumber={3}></Selector>
-          <Selector type='columns' columnsNumber={1}></Selector>
+          <Selector type='boolean' columnsNumber={1} updateRule={updateRule} ></Selector>
+          <Selector type='comparation' columnsNumber={3} updateRule={updateRule}></Selector>
+          <Selector type='columns' columnsNumber={1} updateRule={updateRule}></Selector>
         </div>  
         </container>
 
@@ -49,8 +60,8 @@ class Home extends Component{
            <td>
           <Stack direction='row' spacing={2}>
             <Box sx={{width: 500, maxWidth: '100%',}}>
-              <TextField fullWidth label="Regla" id="rule">{this.rule}</TextField>
-            </Box>
+              <textarea id='rule' placeholder='COLUMNA1 > 35'></textarea>
+              </Box>
             <Button variant="contained" endIcon={<SendIcon />}>Validar</Button>
           </Stack> 
           </td>         
