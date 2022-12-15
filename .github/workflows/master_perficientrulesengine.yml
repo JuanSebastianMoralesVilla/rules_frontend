@@ -4,9 +4,9 @@
 name: Build and deploy Node.js app to Azure Web App - PerficientRulesEngine
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    branches: [ "master" ]
+    
   workflow_dispatch:
 
 jobs:
