@@ -16,8 +16,6 @@
 
 }
 
-
-
 .parent {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -26,7 +24,9 @@
   grid-row-gap: 0px;
   }
   
-  .buttonGrid { grid-area: 2 / 4 / 3 / 5; }
+.buttonGrid {
+  grid-area: 2 / 4 / 3 / 5;
+}
 
 .separator{
   background-color:  rgba(213, 1, 0, 1);
@@ -35,12 +35,14 @@
   justify-content: flex-start;
   align-items: center;
 }
+
 .textExample{
 
   color: black;
   font-family: fantasy;
   font-size: 20px;
 }
+
 .divcentro {
   width: 33.33%;
   background-color: white;
@@ -53,26 +55,10 @@
   transform: translateX(-50%);
 }
 
-
-
 .body {
     flex-wrap: nowrap;
     align-content: center;
     background-color: white;
-
-}
-
-
-
-.expression-builder-selectors {
-
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    position: vertical;
-    font-size: 20px;
 
 }
 
@@ -82,21 +68,40 @@
 
 .rule-container {
   display:inline-block;
-    padding-top: 10px 50px 20px;;
+  padding-top: 10px 50px 20px;
 }
 
+.selector-head{
+  height: 60px;
+  border-bottom: 2px solid black;
+}
+
+.selectors-table{
+  border-collapse: separate;
+  border-spacing: 10px;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
 
+.selectors-table{
+  margin-bottom: 40px;  
+  text-align: center;
+}
+
+.selectors-td{
+  padding: 0 25px 0 15px;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -115,55 +120,41 @@ code {
   font-size: 80%;
 }
 
-
-
-
-
-
 /*
  * Base structure
  */
 
-
-
 .area{
-
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   justify-content: center;
-
 }
 
 label {
   vertical-align: top;
 }
 
-body {
- 
+body { 
   -ms-flex-pack: center;
   -webkit-box-pack: center;
   justify-content: center;
   color: rgb(10, 10, 10);
-
 }
 
 .cover-container {
   max-width: 42em;
 }
 
-
 /*
  * Header
  */
+
 .masthead {
   margin-bottom: 2rem;
 }
 
 .masthead-brand {
   margin-bottom: 4px;
-
-
-
 }
 
 .nav-masthead .nav-link {
@@ -197,42 +188,35 @@ body {
   }
 }
 
-
 /*
  * Cover
  */
 .cover {
   padding: 0 1.5rem;
 }
+
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
 }
 
-
 th {
-
   letter-spacing: 2px;
   width: 10%;
 	height: 100px;
 }
 
 td {
-
   letter-spacing: 1px;
   width: 20%;
-	
- 
 }
 
 tbody td {
   width: 20%;
-
   text-align: center;
 }
 
 tfoot th {
   width: 20%;
-
   text-align: right;
 }

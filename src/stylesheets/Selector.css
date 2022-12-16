@@ -1,8 +1,3 @@
-.button{
-    width: 90%;
-    height: 90%;
-}
-
-.Item:hover{
-    background-color: aqua;
+td{
+  padding: 3px;
 }

@@ -1,29 +1,19 @@
-
 import React, { Component } from 'react';
 
 import Selector from '../components/Selector.js'
 import '../stylesheets/Home.css';
-import Box from '@mui/material/Box';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-
+import { DataGrid } from '@mui/x-data-grid';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Table from 'react-bootstrap/Table';
 
-
-import { DataGrid } from '@mui/x-data-grid';
-
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-
 class Home extends Component {
-
-  constructor() {
-    super();
-    this.rule = 'asdasdasd';
-  }
 
   render() {
 
@@ -38,7 +28,6 @@ class Home extends Component {
 
       input.setSelectionRange(input.value.length, input.value.length);
       input.focus();
-
     }
 
 
@@ -106,47 +95,34 @@ class Home extends Component {
             <div className='textExample'>
               <li>Column 1 = 5</li>
               <li>Column 2 != column 3</li>
-              <li>(Column 1 > column 2) AND (Column 1 = 2)</li>
-
+              <li>(Column 1 {'>'} column 2) AND (Column 1 = 2)</li>
             </div>
           </p>
 
 
-
-
-
-          <Table>
-            <td>
-              Logical
-            </td>
-            <td>
-              Boolean
-            </td>
-            <td>
-              Comparatives
-            </td>
-            <td>
-              Columns
-
-            </td>
-
-
-          </Table>
+          <table className='selectors-table'>
+            <thead>
+              <tr>
+                <th className='selector-head'>Logical</th>
+                <th className='selector-head'>Boolean</th>
+                <th className='selector-head'>Comparation</th>
+                <th className='selector-head'>Columns</th>
+              </tr>
+            </thead>
+            <tbody className='selectors-body'>
+              <tr className='selectors-tr'>
+                <td className='selectors-td'><Selector type='logical'updateRule={updateRule} /></td>
+                <td className='selectors-td'><Selector type='boolean' updateRule={updateRule} /></td>
+                <td className='selectors-td'><Selector type='comparation' updateRule={updateRule} /></td>
+                <td className='selectors-td'><Selector type='columns' updateRule={updateRule} /></td>
+              </tr>
+            </tbody>
+          </table>
 
 
 
 
           <div >
-
-
-            <div className='expression-builder-selectors'>
-              <Selector type='logical' columnsNumber={1} updateRule={updateRule} ></Selector>
-              <Selector type='boolean' columnsNumber={1} updateRule={updateRule} ></Selector>
-              <Selector type='comparation' columnsNumber={3} updateRule={updateRule}></Selector>
-              <Selector type='columns' columnsNumber={2} updateRule={updateRule}></Selector>
-            </div>
-
-
             <div>
               <container className="area">
 
