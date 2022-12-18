@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { DataGrid } from "@mui/x-data-grid";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import {Select,MenuItem} from '@material-ui/core';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -113,6 +114,17 @@ class Home extends Component {
               </tr>
             </tbody>
           </table>
+
+
+          <div className='db-table-selector'>
+            <h3>Select database table:</h3>
+            <Select displayEmpty>
+              <MenuItem value="" disable>Select column</MenuItem>
+              <MenuItem value={1} onClick={() => console.log('click')} disable>Tabla 1</MenuItem>
+              <MenuItem value={2} onClick={() => console.log('click')} disable>Tabla 2</MenuItem>
+            </Select>
+          </div>
+
 
           <div>
             <div>
