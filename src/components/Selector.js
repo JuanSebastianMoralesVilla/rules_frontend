@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import {Select,MenuItem} from '@material-ui/core';
 
 
-function Selector({type, updateRule}){
+function Selector({type, updateRule, columns}){
 
     const options = [];
 
@@ -43,15 +43,21 @@ function Selector({type, updateRule}){
             break;    
         
         case('columns'):
-        
+                /*
+            const partialOptions = [];         
+            
+            partialOptions.push(<MenuItem value="" disable>Select column</MenuItem>);
+
+            for(var i=0; i < columns.length ; i++){
+                partialOptions.push(<MenuItem value={i} onClick={() => updateRule(columns[i])} disable>columns[i]</MenuItem>);
+            }                    
+                                 
             options.push(<tr>
-                            <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>
-                                <MenuItem value="" disable>Select column</MenuItem>
-                                <MenuItem value={1} onClick={() => updateRule('COLUMNA1')} disable>COLUMN 1</MenuItem>
-                                <MenuItem value={2} onClick={() => updateRule('COLUMNA2')} disable>COLUMN 2</MenuItem>
+                            <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>  
+                                {partialOptions}     
                             </Select>
                         </tr>);
-      
+            console.log(options.toString())*/
         break;
         default:         
     }
