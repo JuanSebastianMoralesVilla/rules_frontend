@@ -19,6 +19,7 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
+      columnsProcessed: [],
       columns: [],
       rows : []
     };
@@ -26,9 +27,13 @@ class Home extends Component {
   
   async getColumns (){    
     const res = await fetch('http://localhost:8080/api/transactions/columns')
-    var columns = await res.json();
+    return await res.json();
+  }
 
-    var columnsProcessed = [];
+  async getColumnsProcessed(){
+    const columns = await this.getColumns();
+
+    const columnsProcessed = [];
     
     for(var i = 0 ; i < columns.length; i++){
       columnsProcessed.push( { field: columns[i] , headerName: columns[i]});
@@ -44,7 +49,7 @@ class Home extends Component {
     var rowsProcessed = [];
       
     for(var i = 0 ; i < rows.length; i++){
-      rowsProcessed.push(rows[i].data);
+      rowsProcessed.push(rows[i].data);     
     }
 
     return rowsProcessed;
@@ -56,11 +61,12 @@ class Home extends Component {
 
   render() {  
 
-    const fillTable = async () => {  
+    const fillTable = async () => { 
+      this.setState({columnsProcessed: await this.getColumnsProcessed()}) 
       this.setState({columns: await this.getColumns()});
       this.setState({rows: await this.getRows()});
     };
-    
+
     const updateRule = (symbol) => {
       var input = document.getElementById("rule");
 
@@ -79,20 +85,20 @@ class Home extends Component {
     };
 
     return (
-      <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
-          <div class="inner">
-            <h2 class="masthead-brand">RULES ENGINE</h2>
-            <nav class="nav nav-masthead justify-content-center"></nav>
+      <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header className="masthead mb-auto">
+          <div className="inner">
+            <h2 className="masthead-brand">RULES ENGINE</h2>
+            <nav className="nav nav-masthead justify-content-center"></nav>
           </div>
         </header>
         <div className="separator">
           <label></label>
         </div>
 
-        <main role="main" class="container">
-          <h4 class="cover-heading">Example</h4>
-          <p class="lead">
+        <main role="main" className="container">
+          <h4 className="cover-heading">Example</h4>
+          <p className="lead">
             <div className="textExample">
               <li>Column 1 = 5</li>
               <li>Column 2 != column 3</li>
@@ -101,8 +107,8 @@ class Home extends Component {
           </p>
 
           <Button variant="contained" onClick={fillTable} endIcon={<SendIcon />}>
-                          Fill table
-                        </Button>
+            Fill table
+          </Button>
 
           <table className="selectors-table">
             <thead>
@@ -125,7 +131,7 @@ class Home extends Component {
                   <Selector type="comparation" updateRule={updateRule} />
                 </td>
                 <td className="selectors-td">
-                  <Selector type="columns" updateRule={updateRule} />
+                  <Selector type="columns" updateRule={updateRule} columns={this.state.columns}/>
                 </td>
               </tr>
             </tbody>
@@ -182,9 +188,9 @@ class Home extends Component {
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid id='main-table'
               rows={this.state.rows}
-              columns={this.state.columns}
+              columns={this.state.columnsProcessed}
               pageSize={5}
-              rowsPerPageOptions={[5]}
+              rowsPerPageOptions={[5]}              
               getRowId={(row) => row.transaction_id}
             />
           </div>
