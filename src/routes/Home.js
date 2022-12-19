@@ -15,7 +15,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 
 class Home extends Component {
+
+  selectedTable;
+
+
   render() {
+
+    const updateSelectedTable = (name) => {
+      
+    };
+    
     const updateRule = (symbol) => {
       var input = document.getElementById("rule");
 
@@ -37,21 +46,9 @@ class Home extends Component {
       { field: "id", headerName: "ID", width: 70 },
       { field: "firstName", headerName: "First name", width: 130 },
       { field: "lastName", headerName: "Last name", width: 130 },
-      {
-        field: "age",
-        headerName: "Age",
-        type: "number",
-        width: 90,
-      },
-      {
-        field: "fullName",
-        headerName: "Full name",
-        description: "This column has a value getter and is not sortable.",
-        sortable: false,
-        width: 160,
-        valueGetter: (params) =>
-          `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-      },
+      { field: "age", headerName: "Age", type: "number", width: 90,},
+      { field: "fullName", headerName: "Full name",
+        description: "This column has a value getter and is not sortable.", sortable: false, width: 160},
     ];
 
     const rows = [
@@ -122,8 +119,8 @@ class Home extends Component {
             <h3>Select database table:</h3>
             <Select displayEmpty>
               <MenuItem value="" disable>Select table</MenuItem>
-              <MenuItem value={1} onClick={() => console.log('click')} disable>Tabla 1</MenuItem>
-              <MenuItem value={2} onClick={() => console.log('click')} disable>Tabla 2</MenuItem>
+              <MenuItem value={1} onClick={() => updateSelectedTable('MOCK_DATA.csv')} disable>Sample Table 1</MenuItem>
+              <MenuItem value={2} onClick={() => updateSelectedTable('MOCK_DATA.json')} disable>Sample Table 2</MenuItem>
             </Select>
           </div>
 
