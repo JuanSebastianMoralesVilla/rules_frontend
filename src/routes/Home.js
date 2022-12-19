@@ -166,7 +166,7 @@ class Home extends Component {
             <h3>Select database table:</h3>
             <Select displayEmpty>
               <MenuItem value="" disable>Select table</MenuItem>
-              <MenuItem value={1} disable>Sample Table 1</MenuItem>
+              <MenuItem value={1}  disable>Sample Table 1</MenuItem>
               <MenuItem value={2}  disable>Sample Table 2</MenuItem>
             </Select>
           </div>
