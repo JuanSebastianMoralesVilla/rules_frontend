@@ -11,7 +11,7 @@ function Selector({type, updateRule, columns}){
     const [selectedColumn,setColumn] = React.useState("");
     const updateSelectVal = (e) => {
         setColumn(e.target.value)
-    }  
+    }
     
     switch(type){
      
@@ -43,21 +43,21 @@ function Selector({type, updateRule, columns}){
             break;    
         
         case('columns'):
-                /*
+                
             const partialOptions = [];         
             
-            partialOptions.push(<MenuItem value="" disable>Select column</MenuItem>);
+            partialOptions.push(<MenuItem value="">Select column</MenuItem>);
 
             for(var i=0; i < columns.length ; i++){
-                partialOptions.push(<MenuItem value={i} onClick={() => updateRule(columns[i])} disable>columns[i]</MenuItem>);
+                const i_copy = i; //Its necessary because i is taken by reference if used directly and all MenuItems got the same value
+                partialOptions.push(<MenuItem id={'column_'+i_copy} value={i} onClick={() => updateRule(columns[i_copy])}>{columns[i]}</MenuItem>);
             }                    
                                  
             options.push(<tr>
-                            <Select value={selectedColumn} displayEmpty  onChange={updateSelectVal}>  
+                            <Select value={selectedColumn} displayEmpty onChange={updateSelectVal}>  
                                 {partialOptions}     
                             </Select>
                         </tr>);
-            console.log(options.toString())*/
         break;
         default:         
     }

@@ -68,6 +68,7 @@ class Home extends Component {
     };
 
     const updateRule = (symbol) => {
+
       var input = document.getElementById("rule");
 
       var cursorPos = input.selectionStart;
