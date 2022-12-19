@@ -85,6 +85,8 @@ class Home extends Component {
               <li>Column 1 = 5</li>
               <li>Column 2 != column 3</li>
               <li>(Column 1 {">"} column 2) AND (Column 1 = 2)</li>
+              <li> Example text : "word"</li>
+              <li>Example   number : 10 </li>
             </div>
           </p>
 
@@ -119,7 +121,7 @@ class Home extends Component {
           <div className='db-table-selector'>
             <h3>Select database table:</h3>
             <Select displayEmpty>
-              <MenuItem value="" disable>Select column</MenuItem>
+              <MenuItem value="" disable>Select table</MenuItem>
               <MenuItem value={1} onClick={() => console.log('click')} disable>Tabla 1</MenuItem>
               <MenuItem value={2} onClick={() => console.log('click')} disable>Tabla 2</MenuItem>
             </Select>
