@@ -26,9 +26,12 @@ class Home extends Component {
   }
   
   async getSavedRules(){
-    //const res = await fetch('http://localhost:8080/api/transactions/columns')
-    //return await res.json();
-    return [];
+    const res = await fetch('http://localhost:8080/api/rules/lastProcessed')
+
+    const rules = await res.json();
+
+    return rules;   
+    
   }
 
   async getColumns (){    
@@ -71,7 +74,17 @@ class Home extends Component {
     const processRule = async () => {
       const ruleInput = document.getElementById("rule");
       const ruleText = ruleInput.value;
-  
+      /*
+      const matchedText = ruleText.match("\\b(AND)\\b|\\b(OR)\\b\g");    
+
+      console.log(matchedText)
+
+      if(matchedText != null && matchedText.length>3){
+        alert("A maximum of 4 expressions per rule are allowed.");
+        this.setState({rows: []});
+        return;
+      }
+      */
       const rawResponse = await fetch('http://localhost:8080/api/transactions/findByRule', {
         method: 'POST',
         headers: {
@@ -83,8 +96,9 @@ class Home extends Component {
 
       const status = await rawResponse.status;
       const response = await rawResponse.text();
-
-      if(status !== 200 || response === ''){
+      console.log(status)
+      if(status !== 200){
+        alert("There was a problem with your rule. Please check that is written properly and the columns exist.");
         this.setState({rows: []});
         return;
       }
@@ -244,15 +258,15 @@ class Home extends Component {
           </div>
           
 
-          <div className="rule-history-container" style={{ height: 200, width: "100%" }}>
+          <div className="rule-history-container" style={{ height: 400, width: "100%" }}>
             <br></br>
             <h4>Rule history</h4>
             <DataGrid id='rule-history-table'
               rows={this.state.rules}
-              columns={[{ field: "rule", headerName: "rule", width: 500 }]}
+              columns={[{ field: "rule", headerName: "rule", width: 600 ,align: "left"}]}
               pageSize={5}
               rowsPerPageOptions={[5]}
-              getRowId={(row) => row.rule}              
+              getRowId={(row) => row.id}              
             />
           </div>
         </main>
