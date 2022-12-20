@@ -7,8 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { DataGrid } from "@mui/x-data-grid";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import {Select,MenuItem} from '@material-ui/core';
+//import {Select,MenuItem} from '@material-ui/core';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -59,13 +58,48 @@ class Home extends Component {
 
   //}
 
-  render() {  
+  async componentDidMount(){
+    this.setState({columnsProcessed: await this.getColumnsProcessed()}) 
+    this.setState({columns: await this.getColumns()});
+  }
 
-    const fillTable = async () => { 
-      this.setState({columnsProcessed: await this.getColumnsProcessed()}) 
-      this.setState({columns: await this.getColumns()});
-      this.setState({rows: await this.getRows()});
-    };
+
+
+
+  render() {  
+    const processRule = async () => {
+      const ruleInput = document.getElementById("rule");
+      const ruleText = ruleInput.value;
+  
+      const rawResponse = await fetch('http://localhost:8080/api/transactions/findByRule', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: ruleText
+      });
+
+      const status = await rawResponse.status;
+      const response = await rawResponse.text();
+
+      if(status !== 200 || response === ''){
+        this.setState({rows: []});
+        return;
+      }
+
+      const rows = JSON.parse(response)
+  
+      var rowsProcessed = [];
+        
+      for(var i = 0 ; i < rows.length; i++){
+        rowsProcessed.push(rows[i].data);     
+      }
+  
+      console.log(rowsProcessed)  
+      
+      this.setState({rows: rowsProcessed});
+    }
 
     const updateRule = (symbol) => {
 
@@ -131,10 +165,6 @@ class Home extends Component {
             </div>
           </p>
 
-          <Button variant="contained" onClick={fillTable} endIcon={<SendIcon />}>
-            Fill table
-          </Button>
-
           <table className="selectors-table">
             <thead>
               <tr>
@@ -162,7 +192,7 @@ class Home extends Component {
             </tbody>
           </table>
 
-
+          {/*
           <div className='db-table-selector'>
             <h3>Select database table:</h3>
             <Select displayEmpty>
@@ -171,7 +201,7 @@ class Home extends Component {
               <MenuItem value={2}  disable>Sample Table 2</MenuItem>
             </Select>
           </div>
-
+          */}
 
           <div>
             <div>
@@ -190,17 +220,10 @@ class Home extends Component {
                     ></textarea>
                   </Box>
                   <td>
-                    {" "}
-                    <Button
-                      variant="contained"
-                      endIcon={<CheckCircleOutlineIcon />}
-                    >
-                      Validate rule
-                    </Button>
                     <td>
                       <div>
-                        <Button variant="contained" endIcon={<SendIcon />}>
-                          Result
+                        <Button variant="contained" onClick={processRule} endIcon={<SendIcon />}>
+                          Process Rule
                         </Button>
                       </div>
                     </td>
@@ -219,6 +242,7 @@ class Home extends Component {
               getRowId={(row) => row.transaction_id}
             />
           </div>
+
         </main>
       </div>
     );
