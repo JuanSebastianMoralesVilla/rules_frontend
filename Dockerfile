@@ -1,4 +1,5 @@
-FROM node:alpine
+
+FROM --platform=linux/amd64 node:alpine
 
 WORKDIR /app
 
@@ -14,3 +15,4 @@ RUN npm run build
 EXPOSE 3000
 
 CMD    ["npm","start"]
+
