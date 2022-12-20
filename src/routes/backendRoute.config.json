@@ -1,0 +1,15 @@
+{
+    "_links" : {
+      "transactions" : {
+        "href" : "http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/transactions{?page,size,sort}",
+        "templated" : true
+      },
+      "rules" : {
+        "href" : "http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/rules{?page,size,sort}",
+        "templated" : true
+      },
+      "profile" : {
+        "href" : "http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/profile"
+      }
+    }
+  }
