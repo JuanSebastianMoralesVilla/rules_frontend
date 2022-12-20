@@ -20,10 +20,17 @@ class Home extends Component {
     this.state = {
       columnsProcessed: [],
       columns: [],
-      rows : []
+      rows : [],
+      rules:[]
     };
   }
   
+  async getSavedRules(){
+    //const res = await fetch('http://localhost:8080/api/transactions/columns')
+    //return await res.json();
+    return [];
+  }
+
   async getColumns (){    
     const res = await fetch('http://localhost:8080/api/transactions/columns')
     return await res.json();
@@ -54,17 +61,11 @@ class Home extends Component {
     return rowsProcessed;
   }
 
-  //async validateAndApplyRule(){
-
-  //}
-
   async componentDidMount(){
     this.setState({columnsProcessed: await this.getColumnsProcessed()}) 
     this.setState({columns: await this.getColumns()});
+    this.setState({rules: await this.getSavedRules()});
   }
-
-
-
 
   render() {  
     const processRule = async () => {
@@ -94,11 +95,10 @@ class Home extends Component {
         
       for(var i = 0 ; i < rows.length; i++){
         rowsProcessed.push(rows[i].data);     
-      }
-  
-      console.log(rowsProcessed)  
+      }   
       
       this.setState({rows: rowsProcessed});
+      this.setState({rules: await this.getSavedRules()});
     }
 
     const updateRule = (symbol) => {
@@ -242,7 +242,19 @@ class Home extends Component {
               getRowId={(row) => row.transaction_id}
             />
           </div>
+          
 
+          <div className="rule-history-container" style={{ height: 200, width: "100%" }}>
+            <br></br>
+            <h4>Rule history</h4>
+            <DataGrid id='rule-history-table'
+              rows={this.state.rules}
+              columns={[{ field: "rule", headerName: "rule", width: 500 }]}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              getRowId={(row) => row.rule}              
+            />
+          </div>
         </main>
       </div>
     );
