@@ -26,7 +26,7 @@ class Home extends Component {
   }
   
   async getSavedRules(){
-    const res = await fetch('http://localhost:8080/api/rules/lastProcessed')
+    const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/rules/lastProcessed')
 
     const rules = await res.json();
 
@@ -35,7 +35,7 @@ class Home extends Component {
   }
 
   async getColumns (){    
-    const res = await fetch('http://localhost:8080/api/transactions/columns')
+    const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/columns')
     return await res.json();
   }
 
@@ -52,7 +52,7 @@ class Home extends Component {
   }
 
   async getRows(){
-    const res = await fetch('http://localhost:8080/api/transactions/')
+    const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/')
     var rows = await res.json();
 
     var rowsProcessed = [];
@@ -85,7 +85,7 @@ class Home extends Component {
         return;
       }
       */
-      const rawResponse = await fetch('http://localhost:8080/api/transactions/findByRule', {
+      const rawResponse = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/findByRule', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
