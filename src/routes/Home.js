@@ -69,20 +69,20 @@ class Home extends Component {
 
     const updateRule = (symbol) => {
 
-      var input = document.getElementById("rule");
+      const ruleInput = document.getElementById("rule");
 
-      var cursorPos = input.selectionStart;
+      const cursorPos = ruleInput.selectionStart;
 
-      var value = input.value;
+      const prevRule = ruleInput.value;      
 
-      input.value = [
-        value.slice(0, cursorPos),
-        symbol + " ",
-        value.slice(cursorPos),
+      ruleInput.value = [
+        prevRule.slice(0, cursorPos),
+        symbol,
+        prevRule.slice(cursorPos),
       ].join("");
 
-      input.setSelectionRange(input.value.length, input.value.length);
-      input.focus();
+      ruleInput.setSelectionRange(ruleInput.value.length, ruleInput.value.length);
+      ruleInput.focus();
     };
 
     /*

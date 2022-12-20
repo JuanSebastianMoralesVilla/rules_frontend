@@ -12,12 +12,12 @@ function Selector({type, updateRule, columns}){
     const updateSelectVal = (e) => {
         setColumn(e.target.value)
     }
-    
+
     switch(type){
      
         case('logical'):
-            options.push(<tr><td><Button variant="contained" onClick={() => updateRule('AND')} className="button button-logical">AND</Button></td></tr>);
-            options.push(<tr><td><Button variant="contained" onClick={() => updateRule('OR')} className="button button-logical">OR</Button></td></tr>);
+            options.push(<tr><td><Button variant="contained" onClick={() => updateRule(')AND(')} className="button button-logical">AND</Button></td></tr>);
+            options.push(<tr><td><Button variant="contained" onClick={() => updateRule(')OR(')} className="button button-logical">OR</Button></td></tr>);
             break;
 
         case('boolean'):
@@ -29,7 +29,7 @@ function Selector({type, updateRule, columns}){
         case('comparation'):       
             options.push(
                 <tr>
-                    <td><Button variant="contained" onClick={() => updateRule('=')} className="button button-comparation">=</Button></td>
+                    <td><Button variant="contained" onClick={() => updateRule('==')} className="button button-comparation">==</Button></td>
                     <td><Button variant="contained" onClick={() => updateRule('>')} className="button button-comparation">{'>'}</Button></td>
                     <td><Button variant="contained" onClick={() => updateRule('<')} className="button button-comparation">{'<'}</Button></td>
                 </tr>);
