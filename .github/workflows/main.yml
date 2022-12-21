@@ -27,16 +27,7 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Save version
-        id: version
-        run: echo ::set-output name=tag::$(echo $(node -p -e "require('./package.json').version"))
-        
-      - name: Increase version
-        run: npm version patch
-        
-      - name: Push new version
-        run: git push
-      
+
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         
