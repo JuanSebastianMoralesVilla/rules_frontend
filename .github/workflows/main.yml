@@ -37,11 +37,3 @@ jobs:
       - name: Push to Docker Hub
         run: docker push sebastianmorales/rule
         
-      - name: Sleep for 30 seconds
-        run: sleep 30s
-        shell: bash
-        
-      - name: Deploy VM
-        run: |
-          ./scripts/deployDocker.sh "{{ secrets.MY_PRIVATE_SSH_KEY }}"
-        
