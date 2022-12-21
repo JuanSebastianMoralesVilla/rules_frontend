@@ -7,6 +7,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { DataGrid } from "@mui/x-data-grid";
+
+import swal from 'sweetalert';
+
 //import {Select,MenuItem} from '@material-ui/core';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -74,6 +77,7 @@ class Home extends Component {
     const processRule = async () => {
       const ruleInput = document.getElementById("rule");
       const ruleText = ruleInput.value;
+      
       /*
       const matchedText = ruleText.match("\\b(AND)\\b|\\b(OR)\\b\g");    
 
@@ -85,6 +89,30 @@ class Home extends Component {
         return;
       }
       */
+
+
+     // const text= ruleText.match();
+     var cantAnd  = (ruleText.match(/AND/g) || []).length;
+
+     var  cantOr = (ruleText.match(/OR/g) || []).length;
+    const suma= cantAnd+cantOr;
+   
+      console.log(cantAnd);
+      console.log(cantOr);
+      if(suma>3){
+        swal("A maximum of 4 expressions per rule are allowed", "You clicked the button!", "error");
+        document.getElementById("rule").value="";
+        return;
+      }else{
+
+        swal({
+          title: "Good job!",
+          text: "look the result in the table",
+          icon: "success",
+        });
+      }
+
+
       const rawResponse = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/findByRule', {
         method: 'POST',
         headers: {
