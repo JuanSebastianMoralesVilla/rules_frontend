@@ -73,35 +73,24 @@ class Home extends Component {
     this.setState({rules: await this.getSavedRules()});
   }
 
+  restoreRule(rule){
+    const ruleInput = document.getElementById("rule");
+    ruleInput.value = rule;
+  }
+
   render() {  
     const processRule = async () => {
       const ruleInput = document.getElementById("rule");
       const ruleText = ruleInput.value;
       
-      /*
-      const matchedText = ruleText.match("\\b(AND)\\b|\\b(OR)\\b\g");    
 
-      console.log(matchedText)
-
-      if(matchedText != null && matchedText.length>3){
-        alert("A maximum of 4 expressions per rule are allowed.");
-        this.setState({rows: []});
-        return;
-      }
-      */
-
-
-     // const text= ruleText.match();
-     var cantAnd  = (ruleText.match(/AND/g) || []).length;
-
-     var  cantOr = (ruleText.match(/OR/g) || []).length;
-    const suma= cantAnd+cantOr;
-   
-      console.log(cantAnd);
-      console.log(cantOr);
+      var cantAnd  = (ruleText.match(/AND/g) || []).length;
+      var  cantOr = (ruleText.match(/OR/g) || []).length;
+      const suma = cantAnd+cantOr;
+  
       if(suma>3){
         swal("A maximum of 4 expressions per rule are allowed", "", "error");
-        document.getElementById("rule").value="";
+        this.setState({rows: []});
         return;
       }
 
@@ -160,28 +149,6 @@ class Home extends Component {
       ruleInput.focus();
     };
 
-    /*
-    const columns = [
-      { field: "id", headerName: "ID", width: 70 },
-      { field: "firstName", headerName: "First name", width: 130 },
-      { field: "lastName", headerName: "Last name", width: 130 },
-      { field: "age", headerName: "Age", type: "number", width: 90,},
-      { field: "fullName", headerName: "Full name",
-        description: "This column has a value getter and is not sortable.", sortable: false, width: 160},
-    ];
-
-    const rows = [
-      { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-      { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-      { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-      { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-      { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-      { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-      { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-      { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-      { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-    ];
-*/
     return (
       <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
         <header className="masthead mb-auto">
@@ -233,17 +200,6 @@ class Home extends Component {
             </tbody>
           </table>
 
-          {/*
-          <div className='db-table-selector'>
-            <h3>Select database table:</h3>
-            <Select displayEmpty>
-              <MenuItem value="" disable>Select table</MenuItem>
-              <MenuItem value={1}  disable>Sample Table 1</MenuItem>
-              <MenuItem value={2}  disable>Sample Table 2</MenuItem>
-            </Select>
-          </div>
-          */}
-
           <div>
             <div>
               <container className="area">
@@ -289,11 +245,13 @@ class Home extends Component {
             <br></br>
             <h4>Rule history</h4>
             <DataGrid id='rule-history-table'
+              onRowClick={(row) => this.restoreRule(row.row.rule)}
               rows={this.state.rules}
-              columns={[{ field: "rule", headerName: "rule", width: 600 ,align: "left"}]}
+              columns={[{ field: "rule", headerName: "rule", width: 600, align: "left"}]}
               pageSize={5}
               rowsPerPageOptions={[5]}
-              getRowId={(row) => row.id}              
+              getRowId={(row) => row.id}        
+              getRowClassName={()=>"rule-history-row"}      
             />
           </div>
         </main>
