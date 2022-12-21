@@ -100,16 +100,9 @@ class Home extends Component {
       console.log(cantAnd);
       console.log(cantOr);
       if(suma>3){
-        swal("A maximum of 4 expressions per rule are allowed", "You clicked the button!", "error");
+        swal("A maximum of 4 expressions per rule are allowed", "", "error");
         document.getElementById("rule").value="";
         return;
-      }else{
-
-        swal({
-          title: "Good job!",
-          text: "look the result in the table",
-          icon: "success",
-        });
       }
 
 
@@ -126,7 +119,13 @@ class Home extends Component {
       const response = await rawResponse.text();
       console.log(status)
       if(status !== 200){
-        alert("There was a problem with your rule. Please check that is written properly and the columns exist.");
+
+        swal({
+          title: "Info",
+          text: "There was a problem with your rule. Please check that is written properly and the columns exist.",
+          icon: "error",
+        });
+        
         this.setState({rows: []});
         return;
       }
@@ -199,9 +198,9 @@ class Home extends Component {
           <h4 className="cover-heading">Example</h4>
           <p className="lead">
             <div className="textExample">
-              <li>Column 1 = 5</li>
+              <li>Column 1 == 5</li>
               <li>Column 2 != column 3</li>
-              <li>(Column 1 {">"} column 2) AND (Column 1 = 2)</li>
+              <li>(Column 1 {">"} Column 2) AND (Column 1 == 2)</li>
               <li> Example text : "word"</li>
               <li>Example   number : 10 </li>
             </div>
@@ -256,7 +255,7 @@ class Home extends Component {
                     <label>REGLA:</label>&nbsp;&nbsp;
                     <textarea
                       id="rule"
-                      placeholder="COLUMNA1 > 35"
+                      placeholder="(reported==true)AND(amount>50000)"
                       rows="5"
                       cols="50"
                     ></textarea>
