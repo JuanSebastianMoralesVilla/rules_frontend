@@ -64,7 +64,9 @@ function Selector({type, updateRule, columns}){
 
     return(
         <table>
-            {options}
+            <tbody>
+                {options}
+            </tbody>
         </table>
     );
 }

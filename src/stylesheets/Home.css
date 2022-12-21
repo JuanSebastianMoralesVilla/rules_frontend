@@ -85,6 +85,10 @@
   cursor:pointer;
 }
 
+#rule{
+  size: 100%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 

@@ -3,94 +3,90 @@ import React, { Component } from "react";
 import Selector from "../components/Selector.js";
 import "../stylesheets/Home.css";
 
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { DataGrid } from "@mui/x-data-grid";
 
 import swal from 'sweetalert';
 
-//import {Select,MenuItem} from '@material-ui/core';
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Table from "react-bootstrap/Table";
 
 class Home extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       columnsProcessed: [],
       columns: [],
-      rows : [],
-      rules:[]
+      rows: [],
+      rules: []
     };
   }
-  
-  async getSavedRules(){
+
+  async getSavedRules() {
     const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/rules/lastProcessed')
 
     const rules = await res.json();
 
-    return rules;   
-    
+    return rules;
+
   }
 
-  async getColumns (){    
+  async getColumns() {
     const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/columns')
     return await res.json();
   }
 
-  async getColumnsProcessed(){
+  async getColumnsProcessed() {
     const columns = await this.getColumns();
 
     const columnsProcessed = [];
-    
-    for(var i = 0 ; i < columns.length; i++){
-      columnsProcessed.push( { field: columns[i] , headerName: columns[i]});
+
+    for (var i = 0; i < columns.length; i++) {
+      columnsProcessed.push({ field: columns[i], headerName: columns[i] });
     }
 
     return columnsProcessed;
   }
 
-  async getRows(){
+  async getRows() {
     const res = await fetch('http://ruleengineback-env.eba-fpaxptkd.us-east-1.elasticbeanstalk.com/api/transactions/')
     var rows = await res.json();
 
     var rowsProcessed = [];
-      
-    for(var i = 0 ; i < rows.length; i++){
-      rowsProcessed.push(rows[i].data);     
+
+    for (var i = 0; i < rows.length; i++) {
+      rowsProcessed.push(rows[i].data);
     }
 
     return rowsProcessed;
   }
 
-  async componentDidMount(){
-    this.setState({columnsProcessed: await this.getColumnsProcessed()}) 
-    this.setState({columns: await this.getColumns()});
-    this.setState({rules: await this.getSavedRules()});
+  async componentDidMount() {
+    this.setState({ columnsProcessed: await this.getColumnsProcessed() })
+    this.setState({ columns: await this.getColumns() });
+    this.setState({ rules: await this.getSavedRules() });
   }
 
-  restoreRule(rule){
+  restoreRule(rule) {
     const ruleInput = document.getElementById("rule");
     ruleInput.value = rule;
   }
 
-  render() {  
+  render() {
     const processRule = async () => {
       const ruleInput = document.getElementById("rule");
       const ruleText = ruleInput.value;
-      
 
-      var cantAnd  = (ruleText.match(/AND/g) || []).length;
-      var  cantOr = (ruleText.match(/OR/g) || []).length;
-      const suma = cantAnd+cantOr;
-  
-      if(suma>3){
+
+      var cantAnd = (ruleText.match(/AND/g) || []).length;
+      var cantOr = (ruleText.match(/OR/g) || []).length;
+      const suma = cantAnd + cantOr;
+
+      if (suma > 3) {
         swal("A maximum of 4 expressions per rule are allowed", "", "error");
-        this.setState({rows: []});
+        this.setState({ rows: [] });
         return;
       }
 
@@ -107,28 +103,28 @@ class Home extends Component {
       const status = await rawResponse.status;
       const response = await rawResponse.text();
       console.log(status)
-      if(status !== 200){
+      if (status !== 200) {
 
         swal({
           title: "Info",
           text: "There was a problem with your rule. Please check that is written properly and the columns exist.",
           icon: "error",
         });
-        
-        this.setState({rows: []});
+
+        this.setState({ rows: [] });
         return;
       }
 
       const rows = JSON.parse(response)
-  
+
       var rowsProcessed = [];
-        
-      for(var i = 0 ; i < rows.length; i++){
-        rowsProcessed.push(rows[i].data);     
-      }   
-      
-      this.setState({rows: rowsProcessed});
-      this.setState({rules: await this.getSavedRules()});
+
+      for (var i = 0; i < rows.length; i++) {
+        rowsProcessed.push(rows[i].data);
+      }
+
+      this.setState({ rows: rowsProcessed });
+      this.setState({ rules: await this.getSavedRules() });
     }
 
     const updateRule = (symbol) => {
@@ -137,7 +133,7 @@ class Home extends Component {
 
       const cursorPos = ruleInput.selectionStart;
 
-      const prevRule = ruleInput.value;      
+      const prevRule = ruleInput.value;
 
       ruleInput.value = [
         prevRule.slice(0, cursorPos),
@@ -163,15 +159,17 @@ class Home extends Component {
 
         <main role="main" className="container">
           <h4 className="cover-heading">Example</h4>
-          <p className="lead">
-            <div className="textExample">
+          <div className="textExample">
+
+            <ul className="lead">
               <li>Column 1 == 5</li>
               <li>Column 2 != column 3</li>
               <li>(Column 1 {">"} Column 2) AND (Column 1 == 2)</li>
               <li> Example text : "word"</li>
               <li>Example   number : 10 </li>
-            </div>
-          </p>
+            </ul>
+
+          </div>
 
           <table className="selectors-table">
             <thead>
@@ -194,52 +192,47 @@ class Home extends Component {
                   <Selector type="comparation" updateRule={updateRule} />
                 </td>
                 <td className="selectors-td">
-                  <Selector type="columns" updateRule={updateRule} columns={this.state.columns}/>
+                  <Selector type="columns" updateRule={updateRule} columns={this.state.columns} />
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <div>
-            <div>
-              <container className="area">
-                <p></p>
 
-                <Table>
-                  <Box sx={{ width: 500, maxWidth: "100%" }}>
-                    <div></div>
-                    <label>REGLA:</label>&nbsp;&nbsp;
+          <div className="area">
+            <label>Rule:</label>&nbsp;&nbsp;
+            <table>
+              <tbody>
+                <tr className="input-table-row">
+                  <td>
                     <textarea
                       id="rule"
                       placeholder="(reported==true)AND(amount>50000)"
                       rows="5"
                       cols="50"
-                    ></textarea>
-                  </Box>
-                  <td>
-                    <td>
-                      <div>
-                        <Button variant="contained" onClick={processRule} endIcon={<SendIcon />}>
-                          Process Rule
-                        </Button>
-                      </div>
-                    </td>
+                    />
                   </td>
-                </Table>
-              </container>
-            </div>
+                  <td>
+                    <Button variant="contained" onClick={processRule} endIcon={<SendIcon />}>
+                      Process Rule
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+
 
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid id='main-table'
               rows={this.state.rows}
               columns={this.state.columnsProcessed}
               pageSize={5}
-              rowsPerPageOptions={[5]}              
+              rowsPerPageOptions={[5]}
               getRowId={(row) => row.transaction_id}
             />
           </div>
-          
+
 
           <div className="rule-history-container" style={{ height: 400, width: "100%" }}>
             <br></br>
@@ -247,11 +240,11 @@ class Home extends Component {
             <DataGrid id='rule-history-table'
               onRowClick={(row) => this.restoreRule(row.row.rule)}
               rows={this.state.rules}
-              columns={[{ field: "rule", headerName: "rule", width: 600, align: "left"}]}
+              columns={[{ field: "rule", headerName: "rule", width: 600, align: "left" }]}
               pageSize={5}
               rowsPerPageOptions={[5]}
-              getRowId={(row) => row.id}        
-              getRowClassName={()=>"rule-history-row"}      
+              getRowId={(row) => row.id}
+              getRowClassName={() => "rule-history-row"}
             />
           </div>
         </main>
